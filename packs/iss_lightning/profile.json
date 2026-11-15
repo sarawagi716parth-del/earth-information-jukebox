@@ -1,0 +1,32 @@
+{
+ "id": "iss_lightning",
+ "order": 3,
+ "title": "Lightning seen from the International Space Station",
+ "nasa_source": "https://svs.gsfc.nasa.gov/5011/",
+ "credit": "NASA/Goddard Space Flight Center Scientific Visualization Studio. Lightning Imaging Sensor on the ISS (LIS).",
+ "image": "image.jpg",
+ "type": "events",
+ "projection": "equirect",
+ "columns": 64,
+ "work_width": 960,
+ "match": {
+  "hue_degrees": [
+   35,
+   75
+  ],
+  "min_saturation": 0.4,
+  "min_brightness": 45
+ },
+ "height_bins": 12,
+ "max_voices": 3,
+ "min_pixels": 2,
+ "instrument": "bell",
+ "pitch_range_midi": [
+  55,
+  91
+ ],
+ "image_description": "A dark flat world map, one frame from NASA's visualization of lightning seen by the Lightning Imaging Sensor on the International Space Station between 2017 and 2023. Each small yellow dot is lightning the sensor detected over a short window of days. The dashed lines are the tropics and the solid line is the equator. In this frame most lightning is south of the equator: across South America, over southern and central Africa, over Indonesia and northern Australia, and in a few patches over the ocean near the equator. Only a little appears in the north, over the eastern United States and around the Mediterranean and the Middle East. Large areas of ocean and the far north and south are dark, with no lightning.",
+ "listen_for": "short quiet gaps over the eastern Pacific and over India and central Asia, and three busy clusters of mostly low bells south of the equator: South America (around 2.6 seconds), southern Africa (around 4.5 seconds) and Indonesia with northern Australia (around 6.5 seconds). The occasional high bell is a storm over the United States or around the Mediterranean.",
+ "grid_cols": 96,
+ "empty_label": "No lightning here"
+}

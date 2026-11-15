@@ -1,0 +1,174 @@
+{
+ "id": "sea_surface_temperature",
+ "order": 1,
+ "title": "Ocean currents coloured by sea surface temperature",
+ "nasa_source": "https://svs.gsfc.nasa.gov/3912/",
+ "credit": "NASA/Goddard Space Flight Center Scientific Visualization Studio. ECCO2 model (MIT/JPL).",
+ "image": "image.jpg",
+ "type": "values",
+ "projection": "equirect",
+ "columns": 64,
+ "scale": {
+  "palette": [
+   [
+    0.34,
+    "#345cfa"
+   ],
+   [
+    1.49,
+    "#3370ec"
+   ],
+   [
+    2.64,
+    "#3282df"
+   ],
+   [
+    3.78,
+    "#3293d2"
+   ],
+   [
+    4.93,
+    "#32a4c4"
+   ],
+   [
+    6.08,
+    "#33b4b6"
+   ],
+   [
+    7.23,
+    "#34c3a9"
+   ],
+   [
+    8.37,
+    "#35d29c"
+   ],
+   [
+    9.52,
+    "#37e18f"
+   ],
+   [
+    10.67,
+    "#39ed81"
+   ],
+   [
+    11.81,
+    "#3af975"
+   ],
+   [
+    12.96,
+    "#3cff69"
+   ],
+   [
+    14.11,
+    "#3eff5d"
+   ],
+   [
+    15.25,
+    "#45ff50"
+   ],
+   [
+    16.4,
+    "#55ff43"
+   ],
+   [
+    17.55,
+    "#6dff38"
+   ],
+   [
+    18.7,
+    "#8bff2e"
+   ],
+   [
+    19.84,
+    "#acff27"
+   ],
+   [
+    20.99,
+    "#ccff23"
+   ],
+   [
+    22.14,
+    "#e7ff22"
+   ],
+   [
+    23.28,
+    "#fbff21"
+   ],
+   [
+    24.43,
+    "#fbef20"
+   ],
+   [
+    25.58,
+    "#fad41e"
+   ],
+   [
+    26.72,
+    "#f9b31d"
+   ],
+   [
+    27.87,
+    "#f88d1b"
+   ],
+   [
+    29.02,
+    "#f7651a"
+   ],
+   [
+    30.16,
+    "#f73719"
+   ],
+   [
+    31.31,
+    "#f70018"
+   ]
+  ],
+  "match": "hue",
+  "max_colour_distance": 15,
+  "min_saturation": 0.3,
+  "min_brightness": 25,
+  "source": "Sampled from NASA's colour bar file sst_ecco2_cbar.png (ticks at 0, 10, 20 and 32 degrees C)"
+ },
+ "unit": "degrees C",
+ "pitch_range_midi": [
+  40,
+  88
+ ],
+ "min_data_fraction": 0.08,
+ "bands": [
+  {
+   "name": "north",
+   "label": "northern band, 66 to 23 degrees north",
+   "top": 0.13333333333333333,
+   "bottom": 0.36944444444444446,
+   "instrument": "marimba",
+   "every_steps": 2,
+   "offset_steps": 0
+  },
+  {
+   "name": "tropics",
+   "label": "tropics, 23 north to 23 south",
+   "top": 0.36944444444444446,
+   "bottom": 0.6305555555555555,
+   "instrument": "strings",
+   "every_steps": 4,
+   "offset_steps": 0
+  },
+  {
+   "name": "south",
+   "label": "southern band, 23 to 66 degrees south",
+   "top": 0.6305555555555555,
+   "bottom": 0.8666666666666667,
+   "instrument": "pluck",
+   "every_steps": 2,
+   "offset_steps": 1
+  }
+ ],
+ "high_means": "warmer water",
+ "silence_means": "land",
+ "image_description": "A flat world map of the ocean's surface currents, drawn as thousands of thin swirling lines. Each line is coloured by the temperature of the water: blue is near 0 degrees C, green is 10 to 20, yellow about 25 and red up to 32 degrees C. The warmest water (orange and red) forms a wide belt along the equator, strongest in the western Pacific and the Indian Ocean. The water cools through green to blue toward both poles, and the coldest band circles Antarctica. You can see warm currents running up the east coasts of the continents, such as the Gulf Stream off North America and the Kuroshio off Japan, and many small swirling eddies. Land is grey and silent. The model is ECCO2 (MIT and JPL), from a NASA visualization released in 2012 covering March 2007 to March 2008.",
+ "listen_for": "the strings (tropics) staying high almost all the way across, the plucked southern notes sitting low because the Southern Ocean is cold, and the marimba going silent while the sweep crosses North America and again across Europe and Asia.",
+ "grid_cols": 96,
+ "empty_label": "No temperature reading at this exact spot",
+ "empty_label_land": "This is land, so there is no ocean temperature here"
+}

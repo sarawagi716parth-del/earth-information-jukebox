@@ -1,0 +1,59 @@
+{
+ "id": "geos_aerosols_2025",
+ "order": 2,
+ "title": "Aerosols around the world on 19 August 2025",
+ "nasa_source": "https://svs.gsfc.nasa.gov/5669/",
+ "credit": "NASA/Goddard Space Flight Center Scientific Visualization Studio. GEOS model, NASA Global Modeling and Assimilation Office.",
+ "image": "image.png",
+ "type": "categories",
+ "projection": "equirect",
+ "columns": 64,
+ "classes": [
+  {
+   "name": "Sulfate",
+   "colour": "#53dc34",
+   "instrument": "marimba",
+   "hue_tolerance": 30,
+   "min_saturation": 0.4,
+   "min_brightness": 55
+  },
+  {
+   "name": "Dust",
+   "colour": "#c19adc",
+   "instrument": "strings",
+   "hue_tolerance": 35,
+   "min_saturation": 0.18,
+   "min_brightness": 80
+  },
+  {
+   "name": "Black carbon (smoke)",
+   "colour": "#d25e45",
+   "instrument": "bell",
+   "hue_tolerance": 20,
+   "min_saturation": 0.35,
+   "min_brightness": 70
+  },
+  {
+   "name": "Sea salt",
+   "colour": "#85aaa9",
+   "instrument": "flute",
+   "hue_tolerance": 35,
+   "min_saturation": 0.08,
+   "max_saturation": 0.45,
+   "min_brightness": 95
+  }
+ ],
+ "legend_source": "Colours sampled from NASA's legend file Aerosols_cbar.png",
+ "max_voices": 2,
+ "min_coverage": 0.012,
+ "every_steps": 2,
+ "pitch_range_midi": [
+  48,
+  88
+ ],
+ "image_description": "A flat world map from NASA's GEOS computer model for 19 August 2025 at 20:00 UTC, showing tiny particles floating in the air. Green is sulfate, mostly from burning fuel and volcanoes, and it streams across the Northern Hemisphere and along coasts. Purple-pink is dust: a huge plume blows west from the Sahara across the Atlantic toward the Caribbean. Grey-blue swirls over the oceans are sea salt whipped up by winds, including a spiral around Hurricane Erin off the US east coast. Orange-red is black carbon smoke, from fires in central and southern Africa and wildfires in Spain. Land is dark grey with city lights. NASA's page names volcanic plumes from Kilauea and Etna among the sulfate.",
+ "listen_for": "the strings (dust) holding steady, fairly high notes from about 2.8 to 5 seconds while the sweep crosses the Saharan plume over the Atlantic and Africa, the bell (smoke) joining just below it over central Africa around 4 to 4.6 seconds, the marimba (sulfate) carrying most of the rest, and the flute (sea salt) now and then, lower down, over stormy oceans.",
+ "grid_cols": 96,
+ "empty_label": "Clear air here, no aerosol plume",
+ "category_phrase": "Mostly {name} in the air here"
+}
