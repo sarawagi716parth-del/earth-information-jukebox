@@ -1,32 +1,21 @@
-# -----------------------------------------------------------------------------
 # NASA Space Apps Challenge 2026: The Earth Information Jukebox
-# Version Control Rules
-# -----------------------------------------------------------------------------
-
-# Ignore original raw/large NASA video files
-*orig*.mp4
-*large*.mp4
-*medium*.mp4
-*_orig.mp4
-*_original.mp4
-*_raw.mp4
+# The jukebox only uses images now. Keep any video files out of git.
+*.mp4
 *.mov
 *.tif
 *.tiff
-temp_*.mp4
-setup_nasa_packs.py
+raw/
 
-# Explicitly ignore any original video in pack directories
-packs/*/*/*_orig.mp4
-packs/*/*/*_original.mp4
-packs/*/*/*_raw.mp4
+# Images people upload in the web page
+uploads/
 
-# Commit ONLY the trimmed 720p copies
-!packs/*/*/video_720p.mp4
-
-# Python bytecode and temporary logs
+# Python bytecode and logs
 __pycache__/
 *.py[cod]
-*$py.class
 *.log
-tests/__pycache__/
+
+# Secrets and local Python environments (the project has no keys today; this keeps any future ones out)
+.env
+*.env
+.venv/
+venv/

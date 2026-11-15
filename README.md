@@ -1,67 +1,97 @@
 # The Earth Information Jukebox
-### NASA Space Apps Challenge 2026 • Real NASA SVS Multi-Sensory Platform
 
-An accessible, multi-sensory planetary data sonification platform that transforms real NASA Scientific Visualization Studio (SVS) video datasets into structured, pleasant musical soundscapes paired with concise voice guidance—prioritizing blind and low-vision users first.
+NASA Space Apps Challenge 2026. NASA Earth images you can hear.
 
----
+Pick a NASA image, press Play, and a line sweeps the picture from left to right while music plays what the
+picture shows. The page shows the image with its description on the left, and the sound with its
+description on the right. You can also click any spot on the image (or use the arrow keys) to hear and
+hear spoken what is at that spot, and you can upload your own image.
 
-## 👥 The Team
-- **Parth Sarawagi**: Presenter, Narrative Lead & Researcher (Pitch delivery, demo coordination)
-- **Shivraj Tripathi**: Researcher & Developer (Web application, algorithm testing)
-- **Swayam Raj Gupta**: Researcher & PPT Design (Technical research compilation, presentation deck)
-- **AP**: Researcher & Developer (OpenCV data extraction, audio synthesis engine)
+## Team
+- Parth Sarawagi: presenter, narrative lead, researcher
+- Shivraj Tripathi: researcher, developer
+- Swayam Raj Gupta: researcher, presentation
+- AP: researcher, developer
 
----
+## How we built it
+See [DEVELOPMENT_LOG.md](DEVELOPMENT_LOG.md) for the real timeline: what we built on 14 and 15 November, what went wrong, what we changed and how we used AI. The demo video (29 seconds) and the 7-slide presentation (`CodeHub_Earth_Information_Jukebox.pptx`) are linked from our submission page.
 
-## 🏛️ Architecture: Real NASA SVS Packs (`packs/<pack>/<track>/`)
+## Two modes
+- **Standard mode**: for sighted users. Click or drag on the picture to hear a spot. The place name, the value and
+  the coordinates show under the picture.
+- **Accessible mode** (press `A`, or use the switch at the top right): for blind and low-vision users. Everything is
+  spoken aloud and works from the keyboard, with larger text and a black and white, high-contrast layout.
 
-All data loaded by the application is derived exclusively from real NASA Scientific Visualization Studio (SVS) assets organized as:
+| Key (Accessible mode) | What it does |
+| --- | --- |
+| Space | Play or pause the sound |
+| Arrow keys (Shift = bigger steps) | Move around the picture; hear a note, the place name and what is there |
+| W | Where am I: place, value and coordinates |
+| 1, 2, 3 | Choose a track |
+| I / S | Describe the image / describe the sound |
+| H | Hear the list of keys |
+| V | Built-in voice off or on (turn it off if you use your own screen reader) |
+| Esc | Stop talking |
+| A | Back to Standard mode |
+
+## Place names
+When you explore a world map, the page says where you are, for example "Maharashtra, India" or "Arabian Sea", and
+then what the picture shows there, for example "Lightning here, 8 flash pixels". The names come from
+`static/places.json`, a quarter-degree lookup grid built from Natural Earth (public domain) by
+`tools/build_places.py`. It covers the states and provinces of every country, plus oceans and seas.
+
+## Run it (Windows)
+Double-click `run_jukebox.bat`. It installs the packages, builds the tracks and opens http://127.0.0.1:5000.
+
+Manual way:
 ```
-packs/<pack>/<track>/
-├── video_720p.mp4      # Trimmed 720p (1280x720) scientific video copy
-├── colorbar.png        # Calibrated NASA scientific colour bar
-├── dates.txt           # Observation dates matching video frames
-├── sonified.wav        # 44.1kHz stereo audio sonified from video frames
-├── intro.mp3           # Concise TTS voice guidance intro
-├── reference_frame.png # SVS keyframe
-└── annotated_frame.png # OpenCV contour overlay
+pip install -r requirements.txt
+python build_tracks.py
+python app.py
+```
+Run the checks: `python tests/test_engine.py` (28 checks).
+
+## The tracks (all images are official NASA files)
+| Track | NASA page | How the colours are read |
+| --- | --- | --- |
+| Ocean currents coloured by sea surface temperature | https://svs.gsfc.nasa.gov/3912/ | NASA's colour bar file (0 to 32 degrees C) |
+| Aerosols around the world, 19 August 2025 | https://svs.gsfc.nasa.gov/5669/ | NASA's legend file (sulfate, dust, black carbon, sea salt) |
+| Lightning seen from the International Space Station | https://svs.gsfc.nasa.gov/5011/ | Yellow flash dots |
+| Your own upload | - | Colour scale learned from the picture itself |
+
+## How an image becomes music
+1. **Read the meaning of the colours.** Either from NASA's colour bar or legend, from a colour bar drawn
+   inside the picture, or, with no scale at all, learned from the picture: the engine finds the colours the
+   picture uses, links colours that sit next to each other on the map, and takes the longest chain as the
+   colour scale (the bluest end is "low"). On our 13 Nov 2026 test map this matched a hand-made scale with a
+   rank agreement of 0.998.
+2. **Sweep left to right** in 64 slices (8 seconds). Time = left to right, and the sound moves from the left
+   ear to the right ear.
+3. **Three bands, three instruments** (top, middle, bottom; on world maps: north, tropics, south). Never more
+   than 3 notes at once, because listeners lose track beyond that.
+4. **Higher value = higher note** on one pentatonic scale, so everything sounds good together.
+5. **No data = silence**, so the silences draw the shape of the land, the empty sky or the storm-free ocean.
+6. Three reading modes: `values` (numbers such as temperature), `categories` (kinds such as dust or smoke:
+   kind = instrument, height = pitch, amount = loudness) and `events` (dots such as lightning flashes).
+
+## Folder layout
+```
+app.py               web page server (Flask)
+jukebox_engine.py    the engine: image in, notes + descriptions + audio out
+build_tracks.py      builds every track in packs/
+packs/<track>/       image + NASA colour bar + profile.json (settings), and the built
+                     score.json, grid.json (Explore mode), track.json (texts), sonified.wav
+static/              index.html, style.css, app.js
+tests/test_engine.py checks
+static/places.json   place-name lookup grid (Natural Earth)
+tools/build_places.py  rebuilds static/places.json
 ```
 
-### Active Packs
-1. **`packs/earth_information_center/sea_surface_temperature/`**:
-   - Real NASA SVS visualization of ECCO2 / MUR Sea Surface Temperature & ocean currents.
-   - Includes real thermal colour bar (-2°C to 32°C) and 360 observation dates (2015-06-01 to 2015-11-27).
-2. **`packs/earth_information_center/iss_lightning/`**:
-   - Real NASA SVS observation of ISS Lightning Imaging Sensor (LIS) flash density.
-   - Includes real lightning density colour bar (0.1 to >160 fl/km²/yr) and 360 observation dates (2017-01-01 to 2023-05-23).
-
----
-
-## 🔒 Test Data Isolation (`tests/` only)
-
-Per strict scientific integrity requirements, test data is completely isolated:
-- ONE tiny 64x32 synthetic image with exact ground-truth values (`tests/known_answer_test.png`) is maintained exclusively under `tests/`.
-- The application (`app.py`) **never** loads or references `tests/`.
-
----
-
-## 🚀 Quick Start Instructions
-
-### 1. Launch the Web Application
-Double-click `run_jukebox.bat` or run:
-```powershell
-python -m streamlit run app.py
-```
-Open `http://localhost:8501`.
-
-### 2. Run Automated Test Suite
-To verify known-answer unit invariants, pack integrity, 720p video headers, and .gitignore rules:
-```powershell
-python tests/test_validation_suite.py
-```
-
----
-
-## 📦 Version Control (.gitignore)
-- Original large raw NASA video files (`*orig*.mp4`, `*large*.mp4`, etc.) are ignored by `.gitignore`.
-- Only the trimmed 720p copies (`packs/*/*/video_720p.mp4`) are tracked.
+## References
+- NASA SVS 3912, Global Sea Surface Currents and Temperature (ECCO2 model, MIT/JPL): https://svs.gsfc.nasa.gov/3912/
+- NASA SVS 5669, GEOS Aerosols (2025): https://svs.gsfc.nasa.gov/5669/
+- NASA SVS 5011, ISS Lightning Imaging Sensor: https://svs.gsfc.nasa.gov/5011/
+- Challenge: https://www.spaceappschallenge.org/2026/challenges/the-earth-information-jukebox/
+- Natural Earth (public domain), admin-1 states and provinces and marine polygons, used for place names: https://www.naturalearthdata.com
+- Libraries: Flask, OpenCV, NumPy, SciPy; browser Web Audio and Web Speech APIs.
+- AI use: the engine, page and documentation were written with help from Claude (Anthropic). All data comes from the NASA files above.
