@@ -8,10 +8,11 @@ description on the right. You can also click any spot on the image (or use the a
 hear spoken what is at that spot, and you can upload your own image.
 
 ## Team
-- Parth Sarawagi: presenter, narrative lead, researcher
+- Parth Sarawagi:narrative lead, researcher
 - Shivraj Tripathi: researcher, developer
-- Swayam Raj Gupta: researcher, presentation
+- Swayam Raj Gupta: researcher, prototype and video making
 - AP: researcher, developer
+- Arpit Maurya: prototype and video making, researcher
 
 ## How we built it
 See [DEVELOPMENT_LOG.md](DEVELOPMENT_LOG.md) for the real timeline: what we built on 14 and 15 November, what went wrong, what we changed and how we used AI. The demo video (29 seconds) and the 7-slide presentation (`CodeHub_Earth_Information_Jukebox.pptx`) are linked from our submission page.
