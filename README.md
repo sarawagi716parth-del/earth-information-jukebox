@@ -8,8 +8,8 @@ description on the right. You can also click any spot on the image (or use the a
 hear spoken what is at that spot, and you can upload your own image.
 
 ## Team
-- Parth Sarawagi:narrative lead, researcher
-- Shivraj Tripathi: researcher, developer
+- Parth Sarawagi:narrative lead, researcher [@sarawagi716parth-del](https://github.com/sarawagi716parth-del)
+- Shivraj Tripathi: researcher, developer 
 - Swayam Raj Gupta: researcher, prototype and video making
 - AP: researcher, developer
 - Arpit Maurya: prototype and video making, researcher
